@@ -9,7 +9,7 @@ const styleWithHeight = (
   StyleSheet.create({
     container: {
       ...containerStyle,
-      zIndex: 20,
+      zIndex: 2,
       backgroundColor,
       height,
       borderRadius,

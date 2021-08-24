@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, ScrollView} from 'react-native';
+import {View} from 'react-native';
 import BottomSheet from './components/BottomSheet';
 import Button from './components/Button';
 import CustomCard from './components/CustomCard';
@@ -14,13 +14,17 @@ export default () => {
     justifyContent: 'center',
   };
 
+  const changeShowState = () => {
+    setIsShowing(!isShowing);
+  };
+
   return (
     <>
       <View style={{flex: 1}}>
         <Text>onimaskesi</Text>
         <Text>onimaskesi</Text>
         <Text>onimaskesi</Text>
-        <Button title="show/hide" onPress={() => setIsShowing(!isShowing)} />
+        <Button title="show/hide" onPress={changeShowState} />
         <Text>onimaskesi</Text>
         <Text>onimaskesi</Text>
         <Text>onimaskesi</Text>
@@ -38,9 +42,11 @@ export default () => {
       <BottomSheet
         show={isShowing}
         duration={500}
-        height={500}
+        height={270}
         backgroundColor="powderblue"
-        containerStyle={containerStyle}>
+        borderRadius={10}
+        containerStyle={containerStyle}
+        onPressBackground={changeShowState}>
         <CustomCard />
       </BottomSheet>
     </>

@@ -1,6 +1,7 @@
 import React, {useRef, useEffect} from 'react';
 import {View, Animated, Dimensions} from 'react-native';
 import styleWithHeight from './BottomSheetStyle';
+import Transparent from '../Transparent';
 
 let isVisible = true;
 
@@ -12,6 +13,7 @@ export default ({
   show,
   children,
   duration,
+  onPressBackground,
 }) => {
   const animStartHeight = show ? 0 : height;
   const animFinishHeight = show ? height : 0;
@@ -41,13 +43,17 @@ export default ({
   }, []);
 
   return (
-    <Animated.View
-      style={[
-        {
-          height: movementAnim,
-        },
-      ]}>
-      {!isVisible && <View style={styles.container}>{children}</View>}
-    </Animated.View>
+    <>
+      {show && <Transparent onPress={onPressBackground} />}
+      <Animated.View
+        style={[
+          {
+            height: movementAnim,
+            zIndex: 1,
+          },
+        ]}>
+        {!isVisible && <View style={styles.container}>{children}</View>}
+      </Animated.View>
+    </>
   );
 };
