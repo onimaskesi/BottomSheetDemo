@@ -1,18 +1,11 @@
 import {StyleSheet} from 'react-native';
 
-const styleWithHeight = (
-  height,
-  backgroundColor,
-  borderRadius,
-  containerStyle = {},
-) =>
+const styleWithHeight = (height, containerStyle = {}) =>
   StyleSheet.create({
     container: {
       ...containerStyle,
       zIndex: 2,
-      backgroundColor,
       height,
-      borderRadius,
     },
   });
 

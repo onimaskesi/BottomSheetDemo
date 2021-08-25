@@ -12,9 +12,10 @@ export default () => {
     borderWidth: 5,
     borderColor: 'green',
     justifyContent: 'center',
+    borderRadius: 10,
   };
 
-  const changeShowState = () => {
+  const openBottomSheet = () => {
     setIsShowing(!isShowing);
   };
 
@@ -24,7 +25,7 @@ export default () => {
         <Text>onimaskesi</Text>
         <Text>onimaskesi</Text>
         <Text>onimaskesi</Text>
-        <Button title="show/hide" onPress={changeShowState} />
+        <Button title="show the bottom sheet" onPress={openBottomSheet} />
         <Text>onimaskesi</Text>
         <Text>onimaskesi</Text>
         <Text>onimaskesi</Text>
@@ -41,12 +42,10 @@ export default () => {
       </View>
       <BottomSheet
         show={isShowing}
-        duration={500}
+        setIsShowing={setIsShowing}
         height={270}
-        backgroundColor="powderblue"
-        borderRadius={10}
-        containerStyle={containerStyle}
-        onPressBackground={changeShowState}>
+        duration={250}
+        containerStyle={containerStyle}>
         <CustomCard />
       </BottomSheet>
     </>

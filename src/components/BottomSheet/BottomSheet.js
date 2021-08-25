@@ -1,31 +1,28 @@
-import React, {useRef, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Animated, Dimensions} from 'react-native';
 import styleWithHeight from './BottomSheetStyle';
 import Transparent from '../Transparent';
+import {PanGestureHandler} from 'react-native-gesture-handler';
 
-let isVisible = true;
+let translateYInitialValue;
+let isVisible = false;
 
 export default ({
   height = Dimensions.get('screen').height / 2,
-  backgroundColor = 'black',
-  borderRadius = 30,
-  containerStyle,
+  setIsShowing,
   show,
+  containerStyle,
   children,
   duration,
-  onPressBackground,
 }) => {
-  const animStartHeight = show ? 0 : height;
+  const [dontMove, setDontMove] = useState(false);
+
+  const [animStartHeight, setAnimStartHeight] = useState(show ? 0 : height);
   const animFinishHeight = show ? height : 0;
 
-  const styles = styleWithHeight(
-    height,
-    backgroundColor,
-    borderRadius,
-    containerStyle,
-  );
+  const styles = styleWithHeight(height, containerStyle);
 
-  const movementAnim = useRef(new Animated.Value(animStartHeight)).current;
+  let movementAnim = new Animated.Value(animStartHeight);
 
   let anim = () => {
     Animated.timing(movementAnim, {
@@ -35,25 +32,66 @@ export default ({
     }).start();
   };
 
-  anim();
+  dontMove || anim();
 
   useEffect(() => {
-    isVisible = true;
-    return (isVisible = false);
+    return (isVisible = true);
   }, []);
+
+  useEffect(() => {
+    translateYInitialValue = 0;
+    setAnimStartHeight(show ? 0 : height);
+  }, [show, height]);
+
+  let translateY = new Animated.Value(translateYInitialValue || 0);
+  let zeroY = new Animated.Value(0);
+  const onPanGestureEvent = Animated.event(
+    [
+      {
+        nativeEvent: {
+          translationY: dontMove ? zeroY : translateY,
+        },
+      },
+    ],
+    {useNativeDriver: false},
+  );
+
+  const onSwipeDownAction = event => {
+    if (translateY._value > height / 4) {
+      translateYInitialValue = translateY._value;
+      setDontMove(false, setIsShowing(false));
+    } else if (event.nativeEvent.translationY < 0) {
+      setDontMove(true);
+    } else {
+      setDontMove(false, setAnimStartHeight(height - translateY._value));
+    }
+  };
 
   return (
     <>
-      {show && <Transparent onPress={onPressBackground} />}
-      <Animated.View
-        style={[
-          {
-            height: movementAnim,
-            zIndex: 1,
-          },
-        ]}>
-        {!isVisible && <View style={styles.container}>{children}</View>}
-      </Animated.View>
+      {show && <Transparent onPress={() => setIsShowing(false)} />}
+      {isVisible && (
+        <PanGestureHandler
+          onGestureEvent={onPanGestureEvent}
+          onHandlerStateChange={onSwipeDownAction}>
+          <Animated.View
+            style={[
+              {
+                height: movementAnim,
+                zIndex: 1,
+              },
+              {
+                transform: [
+                  {
+                    translateY: translateY,
+                  },
+                ],
+              },
+            ]}>
+            <View style={styles.container}>{children}</View>
+          </Animated.View>
+        </PanGestureHandler>
+      )}
     </>
   );
 };
