@@ -41,6 +41,7 @@ export default ({
   useEffect(() => {
     translateYInitialValue = 0;
     setAnimStartHeight(show ? 0 : height);
+    setDontMove(false);
   }, [show, height]);
 
   let translateY = new Animated.Value(translateYInitialValue || 0);
