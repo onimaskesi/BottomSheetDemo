@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Animated, Dimensions} from 'react-native';
-import styleWithHeight from './BottomSheetStyle';
+import {Animated, Dimensions} from 'react-native';
 import Transparent from '../Transparent';
 import {PanGestureHandler} from 'react-native-gesture-handler';
 
@@ -16,8 +15,6 @@ export default ({
 }) => {
   const [animStartHeight, setAnimStartHeight] = useState(show ? 0 : height);
   const animFinishHeight = show ? height : 0;
-
-  const styles = styleWithHeight(height);
 
   const translateY = new Animated.Value(translateYInitialValue || 0);
 
