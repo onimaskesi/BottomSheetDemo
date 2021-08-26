@@ -19,9 +19,11 @@ export default ({
 
   const styles = styleWithHeight(height);
 
-  let movementAnim = new Animated.Value(animStartHeight);
+  const translateY = new Animated.Value(translateYInitialValue || 0);
 
-  let anim = () => {
+  const movementAnim = new Animated.Value(animStartHeight);
+
+  const anim = () => {
     Animated.timing(movementAnim, {
       toValue: animFinishHeight,
       duration: duration,
@@ -40,7 +42,6 @@ export default ({
     setAnimStartHeight(show ? 0 : height);
   }, [show, height]);
 
-  let translateY = new Animated.Value(translateYInitialValue || 0);
   const onPanGestureEvent = Animated.event(
     [
       {
@@ -74,7 +75,10 @@ export default ({
             style={[
               {
                 height: movementAnim,
+                width: Dimensions.get('screen').width,
                 zIndex: 2,
+                position: 'absolute',
+                bottom: 0,
                 transform: [
                   {
                     translateY: translateY.interpolate({
