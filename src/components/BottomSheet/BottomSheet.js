@@ -84,7 +84,11 @@ export default ({
               {
                 transform: [
                   {
-                    translateY: translateY,
+                    translateY: translateY.interpolate({
+                      inputRange: [0, height],
+                      outputRange: [0, height],
+                      extrapolateLeft: 'clamp',
+                    }),
                   },
                 ],
               },

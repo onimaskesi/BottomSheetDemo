@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View} from 'react-native';
+import {ScrollView, View} from 'react-native';
 import BottomSheet from './components/BottomSheet';
 import Button from './components/Button';
 import CustomCard from './components/CustomCard';
@@ -44,7 +44,6 @@ export default () => {
         show={isShowing}
         setIsShowing={setIsShowing}
         height={270}
-        duration={250}
         containerStyle={containerStyle}>
         <CustomCard />
       </BottomSheet>

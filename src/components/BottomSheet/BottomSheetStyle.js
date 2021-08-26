@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
 
 const styleWithHeight = (height, containerStyle = {}) =>
   StyleSheet.create({
@@ -6,6 +6,7 @@ const styleWithHeight = (height, containerStyle = {}) =>
       ...containerStyle,
       zIndex: 2,
       height,
+      width: Dimensions.get('screen').width,
     },
   });
 

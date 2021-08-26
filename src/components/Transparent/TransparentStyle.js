@@ -5,7 +5,7 @@ export default StyleSheet.create({
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
     backgroundColor: '#000000AB',
-    zIndex: 0,
+    zIndex: 1,
     position: 'absolute',
   },
 });
