@@ -3,7 +3,6 @@ import {Animated, Dimensions} from 'react-native';
 import Transparent from '../Transparent';
 import {PanGestureHandler} from 'react-native-gesture-handler';
 
-let translateYInitialValue;
 let isVisible = false;
 
 export default ({
@@ -54,7 +53,6 @@ export default ({
     const {translationY} = event.nativeEvent;
     if (translationY > height / 4) {
       translateY.setValue(translationY);
-      //translateYInitialValue = translationY;
       setIsShowing(false);
     } else if (translationY < 0) {
       translateY.setValue(0);
@@ -67,7 +65,7 @@ export default ({
   return (
     <>
       {show && <Transparent onPress={() => setIsShowing(false)} />}
-      {isVisible && (
+      {true && (
         <PanGestureHandler
           onGestureEvent={onPanGestureEvent}
           onHandlerStateChange={onSwipeDownAction}>
