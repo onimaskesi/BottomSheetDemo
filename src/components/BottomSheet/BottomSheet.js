@@ -15,8 +15,6 @@ export default ({
   children,
   duration,
 }) => {
-  const [dontMove, setDontMove] = useState(false);
-
   const [animStartHeight, setAnimStartHeight] = useState(show ? 0 : height);
   const animFinishHeight = show ? height : 0;
 
@@ -32,7 +30,7 @@ export default ({
     }).start();
   };
 
-  dontMove || anim();
+  anim();
 
   useEffect(() => {
     return (isVisible = true);
@@ -41,16 +39,14 @@ export default ({
   useEffect(() => {
     translateYInitialValue = 0;
     setAnimStartHeight(show ? 0 : height);
-    setDontMove(false);
   }, [show, height]);
 
   let translateY = new Animated.Value(translateYInitialValue || 0);
-  let zeroY = new Animated.Value(0);
   const onPanGestureEvent = Animated.event(
     [
       {
         nativeEvent: {
-          translationY: dontMove ? zeroY : translateY,
+          translationY: translateY,
         },
       },
     ],
@@ -60,11 +56,10 @@ export default ({
   const onSwipeDownAction = event => {
     if (translateY._value > height / 4) {
       translateYInitialValue = translateY._value;
-      setDontMove(false, setIsShowing(false));
+      setIsShowing(false);
     } else if (event.nativeEvent.translationY < 0) {
-      setDontMove(true);
     } else {
-      setDontMove(false, setAnimStartHeight(height - translateY._value));
+      setAnimStartHeight(height - translateY._value);
     }
   };
 
