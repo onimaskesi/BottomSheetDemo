@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Dimensions, ScrollView, View} from 'react-native';
+import {ScrollView} from 'react-native';
 import BottomSheet from './components/BottomSheet';
 import Button from './components/Button';
 import CustomCard from './components/CustomCard';

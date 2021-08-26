@@ -15,12 +15,12 @@ export default ({
   const [animStartHeight, setAnimStartHeight] = useState(show ? 0 : height);
   const animFinishHeight = show ? height : 0;
 
-  const translateY = useRef(new Animated.Value(0)).current;
+  const translateYAnimVal = useRef(new Animated.Value(0)).current;
 
-  const heightAnim = new Animated.Value(animStartHeight);
+  const heightAnimVal = new Animated.Value(animStartHeight);
 
   const anim = () => {
-    Animated.timing(heightAnim, {
+    Animated.timing(heightAnimVal, {
       toValue: animFinishHeight,
       duration: duration,
       useNativeDriver: false,
@@ -34,7 +34,7 @@ export default ({
   }, []);
 
   useEffect(() => {
-    show && translateY.setValue(0);
+    show && translateYAnimVal.setValue(0);
     setAnimStartHeight(show ? 0 : height);
   }, [show]);
 
@@ -42,7 +42,7 @@ export default ({
     [
       {
         nativeEvent: {
-          translationY: translateY,
+          translationY: translateYAnimVal,
         },
       },
     ],
@@ -50,17 +50,36 @@ export default ({
   );
 
   const onSwipeDownAction = event => {
-    const {translationY} = event.nativeEvent;
-    if (translationY > height / 4) {
-      translateY.setValue(translationY);
+    const {translationY: eventY} = event.nativeEvent;
+    if (eventY > height / 4) {
+      translateYAnimVal.setValue(eventY);
       setIsShowing(false);
-    } else if (translationY < 0) {
-      translateY.setValue(0);
-    } else if (translationY !== 0) {
-      translateY.setValue(0);
+    } else if (eventY < 0) {
+      translateYAnimVal.setValue(0);
+    } else if (eventY !== 0) {
+      translateYAnimVal.setValue(0);
       setAnimStartHeight(height - event.nativeEvent.translationY);
     }
   };
+
+  const animViewStyle = [
+    {
+      height: heightAnimVal,
+      width: Dimensions.get('screen').width,
+      zIndex: 2,
+      position: 'absolute',
+      bottom: 0,
+      transform: [
+        {
+          translateY: translateYAnimVal.interpolate({
+            inputRange: [0, height],
+            outputRange: [0, height],
+            extrapolateLeft: 'clamp',
+          }),
+        },
+      ],
+    },
+  ];
 
   return (
     <>
@@ -69,27 +88,7 @@ export default ({
         <PanGestureHandler
           onGestureEvent={onPanGestureEvent}
           onHandlerStateChange={onSwipeDownAction}>
-          <Animated.View
-            style={[
-              {
-                height: heightAnim,
-                width: Dimensions.get('screen').width,
-                zIndex: 2,
-                position: 'absolute',
-                bottom: 0,
-                transform: [
-                  {
-                    translateY: translateY.interpolate({
-                      inputRange: [0, height],
-                      outputRange: [0, height],
-                      extrapolateLeft: 'clamp',
-                    }),
-                  },
-                ],
-              },
-            ]}>
-            {children}
-          </Animated.View>
+          <Animated.View style={animViewStyle}>{children}</Animated.View>
         </PanGestureHandler>
       )}
     </>
