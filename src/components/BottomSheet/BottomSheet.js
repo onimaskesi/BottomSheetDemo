@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {Animated, Dimensions} from 'react-native';
 import Transparent from '../Transparent';
 import {PanGestureHandler} from 'react-native-gesture-handler';
@@ -16,7 +16,7 @@ export default ({
   const [animStartHeight, setAnimStartHeight] = useState(show ? 0 : height);
   const animFinishHeight = show ? height : 0;
 
-  const translateY = new Animated.Value(translateYInitialValue || 0);
+  const translateY = useRef(new Animated.Value(0)).current;
 
   const movementAnim = new Animated.Value(animStartHeight);
 
@@ -35,9 +35,9 @@ export default ({
   }, []);
 
   useEffect(() => {
-    translateYInitialValue = 0;
+    show && translateY.setValue(0);
     setAnimStartHeight(show ? 0 : height);
-  }, [show, height]);
+  }, [show]);
 
   const onPanGestureEvent = Animated.event(
     [
@@ -51,13 +51,16 @@ export default ({
   );
 
   const onSwipeDownAction = event => {
-    if (translateY._value > height / 4) {
-      translateYInitialValue = translateY._value;
+    const {translationY} = event.nativeEvent;
+    if (translationY > height / 4) {
+      translateY.setValue(translationY);
+      //translateYInitialValue = translationY;
       setIsShowing(false);
-    } else if (event.nativeEvent.translationY < 0) {
+    } else if (translationY < 0) {
       translateY.setValue(0);
-    } else {
-      setAnimStartHeight(height - translateY._value);
+    } else if (translationY !== 0) {
+      translateY.setValue(0);
+      setAnimStartHeight(height - event.nativeEvent.translationY);
     }
   };
 
