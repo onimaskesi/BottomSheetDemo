@@ -65,7 +65,7 @@ export default ({
   return (
     <>
       {show && <Transparent onPress={() => setIsShowing(false)} />}
-      {true && (
+      {isVisible && (
         <PanGestureHandler
           onGestureEvent={onPanGestureEvent}
           onHandlerStateChange={onSwipeDownAction}>
