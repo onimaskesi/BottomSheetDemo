@@ -17,10 +17,10 @@ export default ({
 
   const translateY = useRef(new Animated.Value(0)).current;
 
-  const movementAnim = new Animated.Value(animStartHeight);
+  const heightAnim = new Animated.Value(animStartHeight);
 
   const anim = () => {
-    Animated.timing(movementAnim, {
+    Animated.timing(heightAnim, {
       toValue: animFinishHeight,
       duration: duration,
       useNativeDriver: false,
@@ -65,14 +65,14 @@ export default ({
   return (
     <>
       {show && <Transparent onPress={() => setIsShowing(false)} />}
-      {isVisible && (
+      {isVisible && height !== 0 && (
         <PanGestureHandler
           onGestureEvent={onPanGestureEvent}
           onHandlerStateChange={onSwipeDownAction}>
           <Animated.View
             style={[
               {
-                height: movementAnim,
+                height: heightAnim,
                 width: Dimensions.get('screen').width,
                 zIndex: 2,
                 position: 'absolute',

@@ -24,11 +24,13 @@ export default () => {
         <Text>onimaskesi</Text>
         <Text>onimaskesi</Text>
         <Text>onimaskesi</Text>
+        <Button title="show the bottom sheet" onPress={openBottomSheet} />
         <Text>onimaskesi</Text>
         <Text>onimaskesi</Text>
         <Text>onimaskesi</Text>
         <Text>onimaskesi</Text>
         <Text>onimaskesi</Text>
+        <Button title="show the bottom sheet" onPress={openBottomSheet} />
         <Text>onimaskesi</Text>
         <Text>onimaskesi</Text>
         <Text>onimaskesi</Text>
