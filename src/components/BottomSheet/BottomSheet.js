@@ -58,6 +58,7 @@ export default ({
       translateYInitialValue = translateY._value;
       setIsShowing(false);
     } else if (event.nativeEvent.translationY < 0) {
+      translateY.setValue(0);
     } else {
       setAnimStartHeight(height - translateY._value);
     }
