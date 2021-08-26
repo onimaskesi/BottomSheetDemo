@@ -11,14 +11,13 @@ export default ({
   height = Dimensions.get('screen').height / 2,
   setIsShowing,
   show,
-  containerStyle,
   children,
   duration,
 }) => {
   const [animStartHeight, setAnimStartHeight] = useState(show ? 0 : height);
   const animFinishHeight = show ? height : 0;
 
-  const styles = styleWithHeight(height, containerStyle);
+  const styles = styleWithHeight(height);
 
   let movementAnim = new Animated.Value(animStartHeight);
 
@@ -75,9 +74,7 @@ export default ({
             style={[
               {
                 height: movementAnim,
-                zIndex: 1,
-              },
-              {
+                zIndex: 2,
                 transform: [
                   {
                     translateY: translateY.interpolate({
@@ -89,7 +86,7 @@ export default ({
                 ],
               },
             ]}>
-            <View style={styles.container}>{children}</View>
+            {children}
           </Animated.View>
         </PanGestureHandler>
       )}
