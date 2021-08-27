@@ -14,7 +14,7 @@ export default () => {
 
   return (
     <>
-      <View style={{flex: 1}}>
+      <ScrollView style={{flex: 1}}>
         <Text>onimaskesi</Text>
         <Text>onimaskesi</Text>
         <Text>onimaskesi</Text>
@@ -34,7 +34,7 @@ export default () => {
         <Text>onimaskesi</Text>
         <Text>onimaskesi</Text>
         <Text>onimaskesi</Text>
-      </View>
+      </ScrollView>
       <BottomSheet show={isShowing} setIsShowing={setIsShowing} height={300}>
         <CustomCard />
       </BottomSheet>
