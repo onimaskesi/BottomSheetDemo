@@ -1,7 +1,9 @@
-import React, {useRef} from 'react';
+import React, {useRef, useEffect} from 'react';
 import {Animated, Dimensions} from 'react-native';
 import Transparent from './Transparent';
 import {PanGestureHandler} from 'react-native-gesture-handler';
+
+let isVisible = false;
 
 export default ({
   height = Dimensions.get('screen').height / 2,
@@ -12,6 +14,10 @@ export default ({
   const heightAnimVal = useRef(new Animated.Value(show ? 0 : height)).current;
 
   const autoCloseHeightLimit = height / 4;
+
+  useEffect(() => {
+    return (isVisible = true);
+  }, []);
 
   const anim = toValue => {
     Animated.timing(heightAnimVal, {
@@ -50,9 +56,11 @@ export default ({
   return (
     <>
       {show && <Transparent onPress={() => setIsShowing(false)} />}
-      <PanGestureHandler onGestureEvent={onSwipeDownAction} onEnded={onEnded}>
-        <Animated.View style={animViewStyle}>{children}</Animated.View>
-      </PanGestureHandler>
+      {isVisible && (
+        <PanGestureHandler onGestureEvent={onSwipeDownAction} onEnded={onEnded}>
+          <Animated.View style={animViewStyle}>{children}</Animated.View>
+        </PanGestureHandler>
+      )}
     </>
   );
 };
