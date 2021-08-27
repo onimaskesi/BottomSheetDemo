@@ -9,7 +9,7 @@ export default () => {
   const [isShowing, setIsShowing] = useState(false);
 
   const openBottomSheet = () => {
-    setIsShowing(!isShowing);
+    setIsShowing(true);
   };
 
   return (

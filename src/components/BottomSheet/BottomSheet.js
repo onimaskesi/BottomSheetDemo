@@ -52,7 +52,6 @@ export default ({
   const onSwipeDownAction = event => {
     const {translationY: eventY} = event.nativeEvent;
     if (eventY > height / 4) {
-      translateYAnimVal.setValue(eventY);
       setIsShowing(false);
     } else if (eventY < 0) {
       translateYAnimVal.setValue(0);
