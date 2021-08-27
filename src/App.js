@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ScrollView} from 'react-native';
+import {ScrollView, View} from 'react-native';
 import BottomSheet from './components/BottomSheet';
 import Button from './components/Button';
 import CustomCard from './components/CustomCard';
@@ -14,7 +14,7 @@ export default () => {
 
   return (
     <>
-      <ScrollView style={{flex: 1}}>
+      <View style={{flex: 1}}>
         <Text>onimaskesi</Text>
         <Text>onimaskesi</Text>
         <Text>onimaskesi</Text>
@@ -34,7 +34,7 @@ export default () => {
         <Text>onimaskesi</Text>
         <Text>onimaskesi</Text>
         <Text>onimaskesi</Text>
-      </ScrollView>
+      </View>
       <BottomSheet show={isShowing} setIsShowing={setIsShowing} height={300}>
         <CustomCard />
       </BottomSheet>
