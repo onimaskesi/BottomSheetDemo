@@ -1,23 +1,18 @@
-import React, {useRef, useEffect} from 'react';
-import {Animated, Dimensions} from 'react-native';
+import React, {useRef, useEffect, useState} from 'react';
+import {Animated, Dimensions, View} from 'react-native';
 import Transparent from './Transparent';
 import {PanGestureHandler} from 'react-native-gesture-handler';
 
 let isVisible = false;
 
-export default ({
-  height = Dimensions.get('screen').height / 2,
-  setIsShowing,
-  show,
-  children,
-}) => {
-  const heightAnimVal = useRef(new Animated.Value(show ? 0 : height)).current;
+export default ({height = 0, setIsShowing, show, children, style}) => {
+  const [initialHeight, setInitialHeight] = useState(height);
 
-  const autoCloseHeightLimit = height / 4;
+  const heightAnimVal = useRef(
+    new Animated.Value(show ? 0 : initialHeight),
+  ).current;
 
-  useEffect(() => {
-    return (isVisible = true);
-  }, []);
+  const autoCloseHeightLimit = initialHeight / 4;
 
   const anim = toValue => {
     Animated.timing(heightAnimVal, {
@@ -27,11 +22,15 @@ export default ({
     }).start();
   };
 
-  anim(show ? height : 0);
+  useEffect(() => {
+    return (isVisible = true);
+  }, []);
+
+  anim(show ? initialHeight : 0);
 
   const onSwipeDownAction = event => {
     const {translationY: eventY} = event.nativeEvent;
-    eventY > 0 && heightAnimVal.setValue(height - eventY);
+    eventY > 0 && heightAnimVal.setValue(initialHeight - eventY);
   };
 
   const onEnded = event => {
@@ -39,7 +38,7 @@ export default ({
     if (eventY > autoCloseHeightLimit) {
       setIsShowing(false);
     } else if (eventY > 0) {
-      anim(height);
+      anim(initialHeight);
     }
   };
 
@@ -53,12 +52,25 @@ export default ({
     },
   ];
 
+  const calculateAndSetTheInitialHeight = () => (
+    <View
+      style={{position: 'absolute', width: 0, top: initialHeight * -1}}
+      onLayout={event => {
+        initialHeight || setInitialHeight(event.nativeEvent.layout.height);
+      }}>
+      {children}
+    </View>
+  );
+
   return (
     <>
+      {!!initialHeight || calculateAndSetTheInitialHeight()}
       {show && <Transparent onPress={() => setIsShowing(false)} />}
       {isVisible && (
         <PanGestureHandler onGestureEvent={onSwipeDownAction} onEnded={onEnded}>
-          <Animated.View style={animViewStyle}>{children}</Animated.View>
+          <Animated.View style={[animViewStyle, style]}>
+            {children}
+          </Animated.View>
         </PanGestureHandler>
       )}
     </>
