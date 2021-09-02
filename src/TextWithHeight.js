@@ -1,21 +1,16 @@
 import React from 'react';
 import {Text, Animated} from 'react-native';
 
-const TextWithHeight = ({children, style, heightAnimVal}) => {
+const TextWithHeight = ({children, style, height, setHeight}) => {
   return (
     <>
-      {!!heightAnimVal._value || (
+      {!height && (
         <Text
-          style={[
-            style,
-            {
-              flex: 1,
-            },
-          ]}
+          style={{...style, flex: 1, backgroundColor: 'red'}}
           onTextLayout={evnt => {
             console.log(evnt.nativeEvent);
             evnt.nativeEvent.lines.length > 1 &&
-              heightAnimVal.setValue(
+              setHeight(
                 (evnt.nativeEvent.lines.length + 1) *
                   evnt.nativeEvent.lines[0].height,
               );
@@ -23,8 +18,9 @@ const TextWithHeight = ({children, style, heightAnimVal}) => {
           {children}
         </Text>
       )}
-      {!!heightAnimVal._value && (
-        <Animated.Text style={[style, {height: heightAnimVal}]}>
+      {!!height && (
+        <Animated.Text
+          style={{...style, height: height, backgroundColor: 'blue'}}>
           {children}
         </Animated.Text>
       )}
@@ -33,4 +29,3 @@ const TextWithHeight = ({children, style, heightAnimVal}) => {
 };
 
 export default TextWithHeight;
-

@@ -45,7 +45,7 @@ export default () => {
     </View>
   );
 
-  const heightAnimVal = useRef(new Animated.Value(0)).current;
+  const [textHeight, setTextHeight] = useState();
 
   return (
     <>
@@ -77,7 +77,8 @@ export default () => {
             Test
           </Text>
           <TextWithHeight
-            heightAnimVal={heightAnimVal}
+            height={textHeight}
+            setHeight={setTextHeight}
             style={{fontSize: 20, padding: 10}}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
