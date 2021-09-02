@@ -1,11 +1,9 @@
-import React, {useState, useRef} from 'react';
-import {ScrollView, View, Text, Dimensions, Animated, SafeAreaView} from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, SafeAreaView} from 'react-native';
 import BottomSheet from './components/BottomSheet/BottomSheet';
 import Button from './components/Button';
 import CustomCard from './components/CustomCard';
 import TextWithHeight from './TextWithHeight';
-
-const randomHeight = Math.floor(Math.random() * 500 + 200);
 
 export default () => {
   const [isShowing, setIsShowing] = useState(false);
@@ -13,37 +11,6 @@ export default () => {
   const openBottomSheet = () => {
     setIsShowing(true);
   };
-
-  const CustomView = ({children}) => (
-    <View
-      style={{
-        borderWidth: 2,
-        borderColor: 'white',
-        backgroundColor: 'skyblue',
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
-      {children}
-    </View>
-  );
-
-  const CustomViewWithRandomHeight = () => (
-    <View
-      style={{
-        height: randomHeight,
-        backgroundColor: 'orange',
-        alignContent: 'stretch',
-      }}>
-      <CustomView />
-      <CustomView>
-        <Text>{randomHeight}</Text>
-      </CustomView>
-      <CustomView />
-      <Text style={{fontSize: 50}}>asdf</Text>
-      <CustomView />
-    </View>
-  );
 
   const [textHeight, setTextHeight] = useState();
 
@@ -79,7 +46,7 @@ export default () => {
           <TextWithHeight
             height={textHeight}
             setHeight={setTextHeight}
-            style={{fontSize: 20, padding: 10}}>
+            style={{fontSize: 30, padding: 10}}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -97,9 +64,6 @@ export default () => {
             }}>
             Test
           </Text>
-          <CustomCard />
-          <CustomCard />
-          <CustomCard />
           <CustomCard />
         </View>
       </BottomSheet>
