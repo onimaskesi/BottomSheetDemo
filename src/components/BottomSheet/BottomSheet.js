@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import Transparent from './Transparent';
 import {PanGestureHandler} from 'react-native-gesture-handler';
+import BottomSheetTopBar from './BottomSheetTopBar';
 
 let isVisible = false;
 
@@ -67,30 +68,6 @@ export default ({
       bottom: 0,
     },
   ];
-
-  const BottomSheetTopBar = () => (
-    <View
-      style={[
-        topBarStyle,
-        {
-          backgroundColor: 'white',
-          height: 30,
-          borderTopStartRadius: 20,
-          borderTopEndRadius: 20,
-          alignItems: 'center',
-          justifyContent: 'center',
-        },
-      ]}>
-      <View
-        style={{
-          borderTopWidth: 4,
-          width: 40,
-          borderColor: 'lightgray',
-          borderRadius: 5,
-        }}
-      />
-    </View>
-  );
 
   const BottomSheetChildren = () => {
     if (initialHeight === heightLimitForSurroundWithScrollView) {

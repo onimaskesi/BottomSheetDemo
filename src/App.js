@@ -1,6 +1,6 @@
 import React, {useState, useRef} from 'react';
 import {ScrollView, View, Text, Dimensions, Animated, SafeAreaView} from 'react-native';
-import BottomSheet from './components/BottomSheet';
+import BottomSheet from './components/BottomSheet/BottomSheet';
 import Button from './components/Button';
 import CustomCard from './components/CustomCard';
 import TextWithHeight from './TextWithHeight';
