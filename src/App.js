@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import {ScrollView, View} from 'react-native';
+import React, {useState, useRef} from 'react';
+import {ScrollView, View, Text, Dimensions, Animated, SafeAreaView} from 'react-native';
 import BottomSheet from './components/BottomSheet';
 import Button from './components/Button';
 import CustomCard from './components/CustomCard';
-import Text from './components/Text';
+import TextWithHeight from './TextWithHeight';
 
 const randomHeight = Math.floor(Math.random() * 500 + 200);
 
@@ -40,13 +40,16 @@ export default () => {
         <Text>{randomHeight}</Text>
       </CustomView>
       <CustomView />
+      <Text style={{fontSize: 50}}>asdf</Text>
       <CustomView />
     </View>
   );
 
+  const heightAnimVal = useRef(new Animated.Value(0)).current;
+
   return (
     <>
-      <ScrollView style={{flex: 1}}>
+      <SafeAreaView style={{flex: 1}}>
         <Text>onimaskesi</Text>
         <Text>onimaskesi</Text>
         <Text>onimaskesi</Text>
@@ -66,9 +69,35 @@ export default () => {
         <Text>onimaskesi</Text>
         <Text>onimaskesi</Text>
         <Text>onimaskesi</Text>
-      </ScrollView>
+      </SafeAreaView>
       <BottomSheet show={isShowing} setIsShowing={setIsShowing}>
-        <CustomViewWithRandomHeight />
+        <View style={{backgroundColor: 'white'}}>
+          <Text
+            style={{backgroundColor: 'orange', color: 'white', fontSize: 15}}>
+            Test
+          </Text>
+          <TextWithHeight
+            heightAnimVal={heightAnimVal}
+            style={{fontSize: 20, padding: 10}}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </TextWithHeight>
+          <Text
+            style={{
+              backgroundColor: 'orange',
+              color: 'white',
+              fontSize: 15,
+              padding: 20,
+            }}>
+            Test
+          </Text>
+          <CustomCard />
+        </View>
       </BottomSheet>
     </>
   );

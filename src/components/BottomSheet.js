@@ -5,7 +5,14 @@ import {PanGestureHandler} from 'react-native-gesture-handler';
 
 let isVisible = false;
 
-export default ({height = 0, setIsShowing, show, children, style}) => {
+export default ({
+  height = 0,
+  setIsShowing,
+  show,
+  children,
+  style,
+  topBarStyle,
+}) => {
   const [initialHeight, setInitialHeight] = useState(height);
 
   const heightAnimVal = useRef(
@@ -52,24 +59,59 @@ export default ({height = 0, setIsShowing, show, children, style}) => {
     },
   ];
 
+  const BottomSheetTopBar = () => (
+    <View
+      style={[
+        topBarStyle,
+        {
+          backgroundColor: 'white',
+          height: 30,
+          borderTopStartRadius: 20,
+          borderTopEndRadius: 20,
+          alignItems: 'center',
+          justifyContent: 'center',
+        },
+      ]}>
+      <View
+        style={{
+          borderTopWidth: 4,
+          width: 40,
+          borderColor: 'lightgray',
+          borderRadius: 5,
+        }}
+      />
+    </View>
+  );
+
+  const BottomSheetChildren = () => (
+    <>
+      <BottomSheetTopBar />
+      {children}
+    </>
+  );
+
   const calculateAndSetTheInitialHeight = () => (
     <View
-      style={{position: 'absolute', width: 0, top: initialHeight * -1}}
+      style={{
+        position: 'absolute',
+        width: 0,
+        top: Dimensions.get('window').height,
+      }}
       onLayout={event => {
-        initialHeight || setInitialHeight(event.nativeEvent.layout.height);
+        height || setInitialHeight(event.nativeEvent.layout.height);
       }}>
-      {children}
+      <BottomSheetChildren />
     </View>
   );
 
   return (
     <>
-      {!!initialHeight || calculateAndSetTheInitialHeight()}
+      {!!height || calculateAndSetTheInitialHeight()}
       {show && <Transparent onPress={() => setIsShowing(false)} />}
       {isVisible && (
         <PanGestureHandler onGestureEvent={onSwipeDownAction} onEnded={onEnded}>
           <Animated.View style={[animViewStyle, style]}>
-            {children}
+            <BottomSheetChildren />
           </Animated.View>
         </PanGestureHandler>
       )}
