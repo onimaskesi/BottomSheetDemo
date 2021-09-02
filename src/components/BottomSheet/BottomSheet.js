@@ -53,15 +53,13 @@ export default ({
     }
   };
 
-  const animViewStyle = [
-    {
-      height: heightAnimVal,
-      width: dimensions.width,
-      zIndex: 2,
-      position: 'absolute',
-      bottom: 0,
-    },
-  ];
+  const animViewStyle = {
+    height: heightAnimVal,
+    width: dimensions.width,
+    zIndex: 2,
+    position: 'absolute',
+    bottom: 0,
+  };
 
   const BottomSheetChildren = () => {
     const Component =
@@ -106,7 +104,7 @@ export default ({
       {show && <Transparent onPress={() => setIsShowing(false)} />}
       {isVisible && (
         <PanGestureHandler onGestureEvent={onSwipeDownAction} onEnded={onEnded}>
-          <Animated.View style={[animViewStyle, style]}>
+          <Animated.View style={{...style, ...animViewStyle}}>
             <BottomSheetChildren />
           </Animated.View>
         </PanGestureHandler>
