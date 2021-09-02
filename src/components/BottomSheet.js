@@ -97,7 +97,7 @@ export default ({
       return (
         <>
           <BottomSheetTopBar />
-          <ScrollView>{children}</ScrollView>
+          <ScrollView style={{backgroundColor: 'white'}}>{children}</ScrollView>
         </>
       );
     }
