@@ -12,6 +12,21 @@ export default () => {
     setIsShowing(true);
   };
 
+  const ButtonsForOpenBottomSheet = () => {
+    const buttons = [];
+    for (let i = 0; i < 10; i++) {
+      buttons.push(
+        <Button
+          key={i}
+          title="show the bottom sheet"
+          onPress={openBottomSheet}
+        />,
+      );
+    }
+    console.log(buttons);
+    return buttons;
+  };
+
   const [textHeight, setTextHeight] = useState();
 
   const BottomSheetChildren = () => {
@@ -47,21 +62,6 @@ export default () => {
         <CustomCard /> */}
       </View>
     );
-  };
-
-  const ButtonsForOpenBottomSheet = () => {
-    const buttons = [];
-    for (let i = 0; i < 10; i++) {
-      buttons.push(
-        <Button
-          key={i}
-          title="show the bottom sheet"
-          onPress={openBottomSheet}
-        />,
-      );
-    }
-    console.log(buttons);
-    return buttons;
   };
 
   return (
