@@ -1,5 +1,11 @@
 import React, {useRef, useEffect, useState} from 'react';
-import {Animated, Dimensions, View} from 'react-native';
+import {
+  Animated,
+  Dimensions,
+  useWindowDimensions,
+  View,
+  ScrollView,
+} from 'react-native';
 import Transparent from './Transparent';
 import {PanGestureHandler} from 'react-native-gesture-handler';
 
@@ -20,6 +26,9 @@ export default ({
   ).current;
 
   const autoCloseHeightLimit = initialHeight / 4;
+
+  const dimensions = useWindowDimensions();
+  const heightLimitForSurroundWithScrollView = dimensions.height * 0.9;
 
   const anim = toValue => {
     Animated.timing(heightAnimVal, {
@@ -83,26 +92,46 @@ export default ({
     </View>
   );
 
-  const BottomSheetChildren = () => (
-    <>
-      <BottomSheetTopBar />
-      {children}
-    </>
-  );
+  const BottomSheetChildren = () => {
+    if (initialHeight === heightLimitForSurroundWithScrollView) {
+      return (
+        <>
+          <BottomSheetTopBar />
+          <ScrollView>{children}</ScrollView>
+        </>
+      );
+    }
+    return (
+      <>
+        <BottomSheetTopBar />
+        {children}
+      </>
+    );
+  };
 
-  const calculateAndSetTheInitialHeight = () => (
-    <View
-      style={{
-        position: 'absolute',
-        width: 0,
-        top: Dimensions.get('window').height,
-      }}
-      onLayout={event => {
-        height || setInitialHeight(event.nativeEvent.layout.height);
-      }}>
-      <BottomSheetChildren />
-    </View>
-  );
+  const calculateAndSetTheInitialHeight = () => {
+    return (
+      <View
+        style={{
+          position: 'absolute',
+          width: 0,
+          top: Dimensions.get('window').height,
+        }}
+        onLayout={event => {
+          const {height: totalHeight} = event.nativeEvent.layout;
+          if (!height) {
+            setInitialHeight(
+              totalHeight > heightLimitForSurroundWithScrollView ||
+                totalHeight === heightLimitForSurroundWithScrollView
+                ? heightLimitForSurroundWithScrollView
+                : totalHeight,
+            );
+          }
+        }}>
+        <BottomSheetChildren />
+      </View>
+    );
+  };
 
   return (
     <>

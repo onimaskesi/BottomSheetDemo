@@ -98,6 +98,9 @@ export default () => {
             Test
           </Text>
           <CustomCard />
+          <CustomCard />
+          <CustomCard />
+          <CustomCard />
         </View>
       </BottomSheet>
     </>

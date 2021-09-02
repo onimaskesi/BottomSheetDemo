@@ -6,21 +6,16 @@ const TextWithHeight = ({children, style, height, setHeight}) => {
     <>
       {!height && (
         <Text
-          style={{...style, flex: 1, backgroundColor: 'red'}}
+          style={{...style, flex: 1}}
           onTextLayout={evnt => {
-            console.log(evnt.nativeEvent);
-            evnt.nativeEvent.lines.length > 1 &&
-              setHeight(
-                (evnt.nativeEvent.lines.length + 1) *
-                  evnt.nativeEvent.lines[0].height,
-              );
+            const {lines} = evnt.nativeEvent;
+            lines.length > 1 && setHeight((lines.length + 1) * lines[0].height);
           }}>
           {children}
         </Text>
       )}
       {!!height && (
-        <Animated.Text
-          style={{...style, height: height, backgroundColor: 'blue'}}>
+        <Animated.Text style={{...style, height: height}}>
           {children}
         </Animated.Text>
       )}
