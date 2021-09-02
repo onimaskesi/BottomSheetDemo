@@ -70,18 +70,12 @@ export default ({
   ];
 
   const BottomSheetChildren = () => {
-    if (initialHeight === heightLimitForSurroundWithScrollView) {
-      return (
-        <>
-          <BottomSheetTopBar style={topBarStyle} />
-          <ScrollView style={{backgroundColor: 'white'}}>{children}</ScrollView>
-        </>
-      );
-    }
+    const Component =
+      initialHeight == heightLimitForSurroundWithScrollView ? ScrollView : View;
     return (
       <>
         <BottomSheetTopBar style={topBarStyle} />
-        {children}
+        <Component style={{backgroundColor: 'white'}}>{children}</Component>
       </>
     );
   };
