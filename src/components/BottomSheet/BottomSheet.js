@@ -73,14 +73,14 @@ export default ({
     if (initialHeight === heightLimitForSurroundWithScrollView) {
       return (
         <>
-          <BottomSheetTopBar />
+          <BottomSheetTopBar style={topBarStyle} />
           <ScrollView style={{backgroundColor: 'white'}}>{children}</ScrollView>
         </>
       );
     }
     return (
       <>
-        <BottomSheetTopBar />
+        <BottomSheetTopBar style={topBarStyle} />
         {children}
       </>
     );
