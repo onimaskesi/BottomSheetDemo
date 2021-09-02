@@ -1,11 +1,5 @@
 import React, {useRef, useEffect, useState} from 'react';
-import {
-  Animated,
-  Dimensions,
-  useWindowDimensions,
-  View,
-  ScrollView,
-} from 'react-native';
+import {Animated, useWindowDimensions, View, ScrollView} from 'react-native';
 import Transparent from './Transparent';
 import {PanGestureHandler} from 'react-native-gesture-handler';
 import BottomSheetTopBar from './BottomSheetTopBar';
@@ -62,7 +56,7 @@ export default ({
   const animViewStyle = [
     {
       height: heightAnimVal,
-      width: Dimensions.get('screen').width,
+      width: dimensions.width,
       zIndex: 2,
       position: 'absolute',
       bottom: 0,
@@ -80,14 +74,16 @@ export default ({
     );
   };
 
+  const styleForInvisible = {
+    position: 'absolute',
+    width: 0,
+    top: dimensions.height,
+  };
+
   const calculateAndSetTheInitialHeight = () => {
     return (
       <View
-        style={{
-          position: 'absolute',
-          width: 0,
-          top: Dimensions.get('window').height,
-        }}
+        style={{...styleForInvisible}}
         onLayout={event => {
           const {height: totalHeight} = event.nativeEvent.layout;
           if (!height) {
