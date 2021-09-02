@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, SafeAreaView, ScrollView} from 'react-native';
+import {View, Text, ScrollView} from 'react-native';
 import BottomSheet from './components/BottomSheet/BottomSheet';
 import Button from './components/Button';
 import CustomCard from './components/CustomCard';
@@ -23,7 +23,6 @@ export default () => {
         />,
       );
     }
-    console.log(buttons);
     return buttons;
   };
 
