@@ -84,14 +84,13 @@ export default ({
         style={{...styleForInvisible}}
         onLayout={event => {
           const {height: totalHeight} = event.nativeEvent.layout;
-          if (!height) {
+          !height &&
             setInitialHeight(
               totalHeight > heightLimitForSurroundWithScrollView ||
                 totalHeight === heightLimitForSurroundWithScrollView
                 ? heightLimitForSurroundWithScrollView
                 : totalHeight,
             );
-          }
         }}>
         <BottomSheetChildren />
       </View>
