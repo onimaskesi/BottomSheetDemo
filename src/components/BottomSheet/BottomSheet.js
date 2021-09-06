@@ -90,11 +90,16 @@ export default ({height = 0, setIsShowing, show, children, topBarStyle}) => {
           <PanGestureHandler
             onGestureEvent={onSwipeDownAction}
             onEnded={onEndOfTouch}>
-            <View>
+            <View style={{backgroundColor: 'white'}}>
               <BottomSheetTopBar style={topBarStyle} />
+              {initialHeight !== heightLimit && children}
             </View>
           </PanGestureHandler>
-          <ScrollView style={{backgroundColor: 'white'}}>{children}</ScrollView>
+          {initialHeight === heightLimit && (
+            <ScrollView style={{backgroundColor: 'white'}}>
+              {children}
+            </ScrollView>
+          )}
         </Animated.View>
       )}
     </>
