@@ -3,6 +3,7 @@ import {View, ScrollView, Text, Dimensions} from 'react-native';
 import BottomSheet from './components/BottomSheet/BottomSheet';
 import Button from './components/Button';
 import CustomCard from './components/CustomCard';
+import TextWithHeight from './components/TextWithHeight';
 
 export default () => {
   const [isShowing, setIsShowing] = useState(false);
@@ -47,19 +48,27 @@ export default () => {
   const BottomSheetChildren3 = () => {
     return (
       <View style={{alignItems: 'center', justifyContent: 'center'}}>
-        <Text style={{fontSize: 20, padding: 10, height: 100}}>
+        <TextWithHeight
+          height={textHeight}
+          setHeight={setTextHeight}
+          style={{fontSize: 20, padding: 10}}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </Text>
+        </TextWithHeight>
         <Button title="Button Title" />
       </View>
     );
   };
 
+  const [textHeight, setTextHeight] = useState();
+
   const BottomSheetChildren4 = () => {
     return (
       <View style={{alignItems: 'center', justifyContent: 'center'}}>
-        <Text style={{fontSize: 20, padding: 10}}>
+        <TextWithHeight
+          height={textHeight}
+          setHeight={setTextHeight}
+          style={{fontSize: 20, padding: 10}}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -67,7 +76,7 @@ export default () => {
           reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
           culpa qui officia deserunt mollit anim id est laborum.
-        </Text>
+        </TextWithHeight>
         <Button title="Button Title" />
       </View>
     );
