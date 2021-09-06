@@ -6,14 +6,19 @@ import BottomSheetTopBar from './BottomSheetTopBar';
 
 let isVisible = false;
 
-export default ({height = 0, setIsShowing, show, children, topBarStyle}) => {
+export default ({
+  height = 0,
+  setIsShowing,
+  show,
+  children,
+  topBarStyle,
+  style,
+}) => {
   const dimensions = useWindowDimensions();
-  const heightLimitForSurroundWithScrollView = dimensions.height * 0.9;
+  const heightLimit = dimensions.height * 0.9;
 
   const [initialHeight, setInitialHeight] = useState(
-    height > heightLimitForSurroundWithScrollView
-      ? heightLimitForSurroundWithScrollView
-      : height,
+    height > heightLimit ? heightLimit : height,
   );
 
   const heightAnimVal = useRef(
@@ -25,7 +30,7 @@ export default ({height = 0, setIsShowing, show, children, topBarStyle}) => {
   const anim = toValue => {
     Animated.timing(heightAnimVal, {
       toValue: toValue,
-      duration: 500,
+      duration: 300,
       useNativeDriver: false,
     }).start();
   };
@@ -43,6 +48,7 @@ export default ({height = 0, setIsShowing, show, children, topBarStyle}) => {
 
   const onEndOfTouch = event => {
     const {translationY: eventY} = event.nativeEvent;
+    console.log(eventY);
     if (eventY > autoCloseHeightLimit) {
       setIsShowing(false);
     } else if (eventY > 0) {
@@ -72,14 +78,13 @@ export default ({height = 0, setIsShowing, show, children, topBarStyle}) => {
           const {height: totalHeight} = event.nativeEvent.layout;
           !height &&
             setInitialHeight(
-              totalHeight > heightLimitForSurroundWithScrollView ||
-                totalHeight === heightLimitForSurroundWithScrollView
-                ? heightLimitForSurroundWithScrollView
+              totalHeight > heightLimit || totalHeight === heightLimit
+                ? heightLimit
                 : totalHeight,
             );
         }}>
         <BottomSheetTopBar style={topBarStyle} />
-        <ScrollView style={{backgroundColor: 'white'}}>{children}</ScrollView>
+        {children}
       </View>
     );
   };

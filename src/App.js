@@ -56,10 +56,15 @@ export default () => {
     );
   };
 
+  const [textHeight, setTextHeight] = useState();
+
   const BottomSheetChildren4 = () => {
     return (
       <View style={{alignItems: 'center', justifyContent: 'center'}}>
-        <Text style={{fontSize: 30, padding: 10}}>
+        <Text
+          height={textHeight}
+          setHeight={setTextHeight}
+          style={{fontSize: 20, padding: 10}}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -73,16 +78,29 @@ export default () => {
     );
   };
 
+  const BottomSheetChildren5 = () => (
+    <View style={{backgroundColor: 'skyblue'}}>
+      <Button title="Press Me" />
+      <Text
+        style={{
+          height: 30,
+          alignSelf: 'center',
+          fontSize: 25,
+          color: 'white',
+        }}>
+        Hello World
+      </Text>
+      <CustomCard />
+    </View>
+  );
+
   return (
     <>
       <ScrollView style={{flex: 1}}>
         <ButtonsForOpenBottomSheet />
       </ScrollView>
-      <BottomSheet
-        show={isShowing}
-        setIsShowing={setIsShowing}
-        height={Dimensions.get('window').height}>
-        <BottomSheetChildren4 />
+      <BottomSheet show={isShowing} setIsShowing={setIsShowing}>
+        <BottomSheetChildren5 />
       </BottomSheet>
     </>
   );
