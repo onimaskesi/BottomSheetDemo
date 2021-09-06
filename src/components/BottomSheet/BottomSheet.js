@@ -6,14 +6,7 @@ import BottomSheetTopBar from './BottomSheetTopBar';
 
 let isVisible = false;
 
-export default ({
-  height = 0,
-  setIsShowing,
-  show,
-  children,
-  topBarStyle,
-  style,
-}) => {
+export default ({height = 0, setIsShowing, show, children, topBarStyle}) => {
   const dimensions = useWindowDimensions();
   const heightLimit = dimensions.height * 0.9;
 
