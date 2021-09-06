@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, ScrollView} from 'react-native';
+import {View, ScrollView, Text} from 'react-native';
 import BottomSheet from './components/BottomSheet/BottomSheet';
 import Button from './components/Button';
 import CustomCard from './components/CustomCard';
@@ -25,13 +25,32 @@ export default () => {
     return buttons;
   };
 
-  const BottomSheetChildren = () => {
+  const BottomSheetChildren1 = () => {
     return (
       <View style={{backgroundColor: 'white'}}>
         <CustomCard />
-        {/* <CustomCard />
+      </View>
+    );
+  };
+
+  const BottomSheetChildren2 = () => {
+    return (
+      <View style={{backgroundColor: 'white'}}>
         <CustomCard />
-        <CustomCard /> */}
+        <CustomCard />
+        <CustomCard />
+        <CustomCard />
+      </View>
+    );
+  };
+
+  const BottomSheetChildren3 = () => {
+    return (
+      <View style={{alignItems: 'center', justifyContent: 'center'}}>
+        <Text style={{fontSize: 20, padding: 10, height: 50}}>
+          alksdjfkasdjfjkadslkfjaşlsdkjfşlkjasşdlfkjşsldkjaşfljk
+        </Text>
+        <Button title="Button Title" />
       </View>
     );
   };
@@ -42,7 +61,7 @@ export default () => {
         <ButtonsForOpenBottomSheet />
       </ScrollView>
       <BottomSheet show={isShowing} setIsShowing={setIsShowing}>
-        <BottomSheetChildren />
+        <BottomSheetChildren3 />
       </BottomSheet>
     </>
   );
