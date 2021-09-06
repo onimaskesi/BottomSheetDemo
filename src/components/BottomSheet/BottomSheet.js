@@ -6,14 +6,7 @@ import BottomSheetTopBar from './BottomSheetTopBar';
 
 let isVisible = false;
 
-export default ({
-  height = 0,
-  setIsShowing,
-  show,
-  children,
-  style,
-  topBarStyle,
-}) => {
+export default ({height = 0, setIsShowing, show, children, topBarStyle}) => {
   const [initialHeight, setInitialHeight] = useState(height);
 
   const heightAnimVal = useRef(
@@ -105,7 +98,7 @@ export default ({
         <PanGestureHandler
           onGestureEvent={onSwipeDownAction}
           onEnded={onEndOfTouch}>
-          <Animated.View style={{...style, ...animViewStyle}}>
+          <Animated.View style={animViewStyle}>
             <BottomSheetChildren />
           </Animated.View>
         </PanGestureHandler>

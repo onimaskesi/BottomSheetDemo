@@ -7,6 +7,7 @@ import TextWithHeight from './TextWithHeight';
 
 export default () => {
   const [isShowing, setIsShowing] = useState(false);
+  const [textHeight, setTextHeight] = useState();
 
   const openBottomSheet = () => {
     setIsShowing(true);
@@ -25,8 +26,6 @@ export default () => {
     }
     return buttons;
   };
-
-  const [textHeight, setTextHeight] = useState();
 
   const BottomSheetChildren = () => {
     return (
