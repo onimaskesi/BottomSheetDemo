@@ -10,7 +10,7 @@ export default ({children, style, height, setHeight}) => {
           !height &&
             lines.length > 1 && // for ios make sure that take the correct value
             lines[0].text.length > 1 && // for android make sure that take the correct value
-            setHeight((lines.length + 2) * lines[0].height);
+            setHeight((lines.length + 2) * lines[0].height); // calculate the total height and set it
         }}
         style={style}>
         {children}
