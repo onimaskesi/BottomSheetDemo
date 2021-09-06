@@ -65,7 +65,10 @@ export default () => {
   const BottomSheetChildren4 = () => {
     return (
       <View style={styles.view}>
-        <Text style={{fontSize: 20, padding: 10, height: 500}}>
+        <TextWithHeight
+          height={textHeight}
+          setHeight={setTextHeight}
+          style={{fontSize: 20, padding: 10}}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -73,7 +76,7 @@ export default () => {
           reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
           culpa qui officia deserunt mollit anim id est laborum.
-        </Text>
+        </TextWithHeight>
         <Button title="Button Title" />
       </View>
     );
@@ -101,7 +104,7 @@ export default () => {
         <ButtonsForOpenBottomSheet />
       </ScrollView>
       <BottomSheet show={isShowing} setIsShowing={setIsShowing}>
-        <BottomSheetChildren3 />
+        <BottomSheetChildren4 />
       </BottomSheet>
     </>
   );

@@ -87,6 +87,8 @@ export default ({height = 0, setIsShowing, show, children, topBarStyle}) => {
     );
   };
 
+  const isChildInScrollView = initialHeight === heightLimit;
+
   return (
     <>
       {!height && calculateAndSetTheInitialHeight()}
@@ -96,12 +98,16 @@ export default ({height = 0, setIsShowing, show, children, topBarStyle}) => {
           <PanGestureHandler
             onGestureEvent={onSwipeDownAction}
             onEnded={onEndOfTouch}>
-            <View style={{position: 'absolute'}}>
+            <View
+              style={[
+                {width: dimensions.width},
+                !isChildInScrollView && {position: 'absolute'},
+              ]}>
               <BottomSheetTopBar style={topBarStyle} />
-              {initialHeight !== heightLimit && children}
+              {!isChildInScrollView && children}
             </View>
           </PanGestureHandler>
-          {initialHeight === heightLimit && (
+          {isChildInScrollView && (
             <ScrollView style={{backgroundColor: 'white'}}>
               {children}
             </ScrollView>
