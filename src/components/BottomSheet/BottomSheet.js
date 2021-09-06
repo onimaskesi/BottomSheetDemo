@@ -95,6 +95,8 @@ export default ({height = 0, setIsShowing, show, children, topBarStyle}) => {
             <View
               style={[
                 {width: dimensions.width},
+                //position absolute because of Children's texts in text components can't dissapear while position is not absolute
+                //and there is isChildInScrollView control because of the topBar can maintain its position while on the ScrollView
                 !isChildInScrollView && {position: 'absolute'},
               ]}>
               <BottomSheetTopBar style={topBarStyle} />
