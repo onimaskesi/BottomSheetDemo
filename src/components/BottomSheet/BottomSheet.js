@@ -21,7 +21,7 @@ export default ({height = 0, setIsShowing, show, children, topBarStyle}) => {
   const anim = toValue => {
     Animated.timing(heightAnimVal, {
       toValue: toValue,
-      duration: 250,
+      duration: 500,
       useNativeDriver: false,
     }).start();
   };
@@ -54,17 +54,6 @@ export default ({height = 0, setIsShowing, show, children, topBarStyle}) => {
     bottom: 0,
   };
 
-  const BottomSheetChildren = () => {
-    const Component =
-      initialHeight == heightLimitForSurroundWithScrollView ? ScrollView : View;
-    return (
-      <>
-        <BottomSheetTopBar style={topBarStyle} />
-        <Component style={{backgroundColor: 'white'}}>{children}</Component>
-      </>
-    );
-  };
-
   const styleForInvisible = {
     position: 'absolute',
     width: 0,
@@ -85,7 +74,8 @@ export default ({height = 0, setIsShowing, show, children, topBarStyle}) => {
                 : totalHeight,
             );
         }}>
-        <BottomSheetChildren />
+        <BottomSheetTopBar style={topBarStyle} />
+        <ScrollView style={{backgroundColor: 'white'}}>{children}</ScrollView>
       </View>
     );
   };
@@ -95,13 +85,16 @@ export default ({height = 0, setIsShowing, show, children, topBarStyle}) => {
       {!!height || calculateAndSetTheInitialHeight()}
       {show && <Transparent onPress={() => setIsShowing(false)} />}
       {isVisible && (
-        <PanGestureHandler
-          onGestureEvent={onSwipeDownAction}
-          onEnded={onEndOfTouch}>
-          <Animated.View style={animViewStyle}>
-            <BottomSheetChildren />
-          </Animated.View>
-        </PanGestureHandler>
+        <Animated.View style={animViewStyle}>
+          <PanGestureHandler
+            onGestureEvent={onSwipeDownAction}
+            onEnded={onEndOfTouch}>
+            <View>
+              <BottomSheetTopBar style={topBarStyle} />
+            </View>
+          </PanGestureHandler>
+          <ScrollView style={{backgroundColor: 'white'}}>{children}</ScrollView>
+        </Animated.View>
       )}
     </>
   );
