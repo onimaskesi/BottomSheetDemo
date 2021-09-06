@@ -104,7 +104,7 @@ export default () => {
         <ButtonsForOpenBottomSheet />
       </ScrollView>
       <BottomSheet show={isShowing} setIsShowing={setIsShowing}>
-        <BottomSheetChildren4 />
+        <BottomSheetChildren5 />
       </BottomSheet>
     </>
   );
