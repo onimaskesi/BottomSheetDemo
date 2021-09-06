@@ -1,11 +1,5 @@
 import React, {useRef, useEffect, useState} from 'react';
-import {
-  Animated,
-  useWindowDimensions,
-  View,
-  ScrollView,
-  Text,
-} from 'react-native';
+import {Animated, useWindowDimensions, View, ScrollView} from 'react-native';
 import Transparent from './Transparent';
 import {PanGestureHandler} from 'react-native-gesture-handler';
 import BottomSheetTopBar from './BottomSheetTopBar';
