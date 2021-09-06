@@ -41,7 +41,6 @@ export default ({height = 0, setIsShowing, show, children, topBarStyle}) => {
 
   const onEndOfTouch = event => {
     const {translationY: eventY} = event.nativeEvent;
-    console.log(eventY);
     if (eventY > autoCloseHeightLimit) {
       setIsShowing(false);
     } else if (eventY > 0) {
