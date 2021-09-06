@@ -44,7 +44,7 @@ export default ({
     eventY > 0 && heightAnimVal.setValue(initialHeight - eventY);
   };
 
-  const onEnded = event => {
+  const onEndOfTouch = event => {
     const {translationY: eventY} = event.nativeEvent;
     if (eventY > autoCloseHeightLimit) {
       setIsShowing(false);
@@ -102,7 +102,9 @@ export default ({
       {!!height || calculateAndSetTheInitialHeight()}
       {show && <Transparent onPress={() => setIsShowing(false)} />}
       {isVisible && (
-        <PanGestureHandler onGestureEvent={onSwipeDownAction} onEnded={onEnded}>
+        <PanGestureHandler
+          onGestureEvent={onSwipeDownAction}
+          onEnded={onEndOfTouch}>
           <Animated.View style={{...style, ...animViewStyle}}>
             <BottomSheetChildren />
           </Animated.View>
