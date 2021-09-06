@@ -56,15 +56,10 @@ export default () => {
     );
   };
 
-  const [textHeight, setTextHeight] = useState();
-
   const BottomSheetChildren4 = () => {
     return (
       <View style={{alignItems: 'center', justifyContent: 'center'}}>
-        <Text
-          height={textHeight}
-          setHeight={setTextHeight}
-          style={{fontSize: 20, padding: 10}}>
+        <Text style={{fontSize: 20, padding: 10}}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
