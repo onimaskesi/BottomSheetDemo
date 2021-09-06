@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, ScrollView, Text} from 'react-native';
+import {View, ScrollView, Text, StyleSheet} from 'react-native';
 import BottomSheet from './components/BottomSheet/BottomSheet';
 import Button from './components/Button';
 import CustomCard from './components/CustomCard';
@@ -47,7 +47,7 @@ export default () => {
 
   const BottomSheetChildren3 = () => {
     return (
-      <View style={{alignItems: 'center', justifyContent: 'center'}}>
+      <View style={styles.view}>
         <TextWithHeight
           height={textHeight}
           setHeight={setTextHeight}
@@ -64,11 +64,8 @@ export default () => {
 
   const BottomSheetChildren4 = () => {
     return (
-      <View style={{alignItems: 'center', justifyContent: 'center'}}>
-        <TextWithHeight
-          height={textHeight}
-          setHeight={setTextHeight}
-          style={{fontSize: 20, padding: 10}}>
+      <View style={styles.view}>
+        <Text style={{fontSize: 20, padding: 10, height: 500}}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -76,7 +73,7 @@ export default () => {
           reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
           culpa qui officia deserunt mollit anim id est laborum.
-        </TextWithHeight>
+        </Text>
         <Button title="Button Title" />
       </View>
     );
@@ -104,8 +101,16 @@ export default () => {
         <ButtonsForOpenBottomSheet />
       </ScrollView>
       <BottomSheet show={isShowing} setIsShowing={setIsShowing}>
-        <BottomSheetChildren5 />
+        <BottomSheetChildren3 />
       </BottomSheet>
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  view: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+  },
+});

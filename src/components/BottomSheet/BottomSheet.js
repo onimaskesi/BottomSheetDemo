@@ -1,5 +1,11 @@
 import React, {useRef, useEffect, useState} from 'react';
-import {Animated, useWindowDimensions, View, ScrollView} from 'react-native';
+import {
+  Animated,
+  useWindowDimensions,
+  View,
+  ScrollView,
+  Text,
+} from 'react-native';
 import Transparent from './Transparent';
 import {PanGestureHandler} from 'react-native-gesture-handler';
 import BottomSheetTopBar from './BottomSheetTopBar';
@@ -83,14 +89,14 @@ export default ({height = 0, setIsShowing, show, children, topBarStyle}) => {
 
   return (
     <>
-      {!!height || calculateAndSetTheInitialHeight()}
+      {!height && calculateAndSetTheInitialHeight()}
       {show && <Transparent onPress={() => setIsShowing(false)} />}
       {isVisible && (
         <Animated.View style={animViewStyle}>
           <PanGestureHandler
             onGestureEvent={onSwipeDownAction}
             onEnded={onEndOfTouch}>
-            <View style={{backgroundColor: 'white'}}>
+            <View style={{position: 'absolute'}}>
               <BottomSheetTopBar style={topBarStyle} />
               {initialHeight !== heightLimit && children}
             </View>
