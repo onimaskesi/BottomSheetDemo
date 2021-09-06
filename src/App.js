@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, ScrollView, Text} from 'react-native';
+import {View, ScrollView, Text, Dimensions} from 'react-native';
 import BottomSheet from './components/BottomSheet/BottomSheet';
 import Button from './components/Button';
 import CustomCard from './components/CustomCard';
@@ -78,8 +78,11 @@ export default () => {
       <ScrollView style={{flex: 1}}>
         <ButtonsForOpenBottomSheet />
       </ScrollView>
-      <BottomSheet show={isShowing} setIsShowing={setIsShowing}>
-        <BottomSheetChildren3 />
+      <BottomSheet
+        show={isShowing}
+        setIsShowing={setIsShowing}
+        height={Dimensions.get('window').height}>
+        <BottomSheetChildren4 />
       </BottomSheet>
     </>
   );

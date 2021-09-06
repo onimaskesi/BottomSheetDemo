@@ -7,16 +7,20 @@ import BottomSheetTopBar from './BottomSheetTopBar';
 let isVisible = false;
 
 export default ({height = 0, setIsShowing, show, children, topBarStyle}) => {
-  const [initialHeight, setInitialHeight] = useState(height);
+  const dimensions = useWindowDimensions();
+  const heightLimitForSurroundWithScrollView = dimensions.height * 0.9;
+
+  const [initialHeight, setInitialHeight] = useState(
+    height > heightLimitForSurroundWithScrollView
+      ? heightLimitForSurroundWithScrollView
+      : height,
+  );
 
   const heightAnimVal = useRef(
     new Animated.Value(show ? 0 : initialHeight),
   ).current;
 
   const autoCloseHeightLimit = initialHeight / 4;
-
-  const dimensions = useWindowDimensions();
-  const heightLimitForSurroundWithScrollView = dimensions.height * 0.9;
 
   const anim = toValue => {
     Animated.timing(heightAnimVal, {
