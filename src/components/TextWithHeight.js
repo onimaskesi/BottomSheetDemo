@@ -1,6 +1,9 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
+// if child(text) has only one line than don't use this component,
+// in this kind of case you should set height manually
+
 export default ({children, style, height, setHeight}) => {
   return (
     <View style={[height && {height: height}]}>
