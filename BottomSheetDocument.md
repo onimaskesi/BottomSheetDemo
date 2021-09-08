@@ -35,6 +35,6 @@ Componentin kapanma olayı: show boolean propertiy'sinin setIsShowing state fonk
 
 * **children:** Componentin tagleri arasına girilen değer (metinsel ifade) *[string]*
 * **style:** Componentin style verisi *[object]*
-* **height: ** Yükseklik değeri (otomatik yükseklik için state value olarak verilmelidir) *[number]*
+* **height:** Yükseklik değeri (otomatik yükseklik için state value olarak verilmelidir) *[number]*
 * **setHeight:**  Yükseklik değerinin set edilmesini sağlayan fonksiyon (otomatik yükseklik için state value olarak verilmelidir) *[function]*
 
