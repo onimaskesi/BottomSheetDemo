@@ -1,9 +1,8 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
-// if child(text) has only one line than don't use this component,
-// in this kind of case you should set height manually
-
+// in onTextLayout the first nativeEvent.lines is incorrect but the second is correct so because of that we use this variable
+let isCorrectLines = false;
 export default ({children, style, height, setHeight}) => {
   return (
     <View style={[height && {height: height}]}>
@@ -11,9 +10,9 @@ export default ({children, style, height, setHeight}) => {
         onTextLayout={evnt => {
           const {lines} = evnt.nativeEvent;
           !height &&
-            lines.length > 1 && // for ios make sure that take the correct value
-            lines[0].text.length > 1 && // for android make sure that take the correct value
+            isCorrectLines &&
             setHeight((lines.length + 2) * lines[0].height); // calculate the total height and set it
+          isCorrectLines = true;
         }}
         style={style}>
         {children}
