@@ -1,9 +1,7 @@
 import React, {useState} from 'react';
 import {View, ScrollView, Text, StyleSheet} from 'react-native';
-// import BottomSheet from './components/BottomSheet/BottomSheet';
 import Button from './components/Button';
 import CustomCard from './components/CustomCard';
-// import TextWithHeight from './components/TextWithHeight';
 import {BottomSheet, TextWithHeight} from '@onimaskesi/bottomsheet';
 
 export default () => {
@@ -105,7 +103,7 @@ export default () => {
         <ButtonsForOpenBottomSheet />
       </ScrollView>
       <BottomSheet show={isShowing} setIsShowing={setIsShowing}>
-        <BottomSheetChildren4 />
+        <BottomSheetChildren2 />
       </BottomSheet>
     </>
   );
