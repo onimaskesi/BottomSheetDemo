@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import {View, ScrollView, Text, StyleSheet} from 'react-native';
-import BottomSheet from './components/BottomSheet/BottomSheet';
+// import BottomSheet from './components/BottomSheet/BottomSheet';
 import Button from './components/Button';
 import CustomCard from './components/CustomCard';
-import TextWithHeight from './components/TextWithHeight';
+// import TextWithHeight from './components/TextWithHeight';
+import {BottomSheet, TextWithHeight} from '@onimaskesi/bottomsheet';
 
 export default () => {
   const [isShowing, setIsShowing] = useState(false);
