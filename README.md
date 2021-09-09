@@ -4,7 +4,7 @@
 
 ---
 
- 	BottomSheet hides and shows its children with slide animation. BottomSheet is on the bottom of the screen.
+BottomSheet hides and shows its children with slide animation. BottomSheet is on the bottom of the screen.
 
 ​    => If the content of BottomSheet children exceeds 90% of the current screen height, the height of BottomSheet remains fixed at 90% and its content is wrapped in the ScrollView.
 
